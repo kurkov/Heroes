@@ -8,23 +8,10 @@ import { Hero } from "./hero";
 
 @Component({
   selector: 'hero-detail',
-  template: `
-    <div *ngIf="hero">
-      <h2>{{hero.name}} details!</h2>
-      <div><label>id: </label>{{hero.id}}</div>
-      <div>
-        <label>name: </label>
-        <input [(ngModel)]="hero.name" placeholder="name">
-      </div>
-      <button (click)="goBack()">Back</button>
-    </div>
-  `
+  templateUrl: './hero-detail.component.html'
 })
-
-
 export class HeroDetailComponent implements OnInit {
-
-  hero: Hero;
+  @Input() hero: Hero;
 
   constructor(
     private heroService: HeroService,
@@ -35,7 +22,7 @@ export class HeroDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params
-      .switchMap((params: Params) => this.heroService.getHeroes(+params['id']))
+      .switchMap((params: Params) => this.heroService.getHero(+params['id']))
       .subscribe(hero => this.hero = hero);
   }
 
