@@ -14,9 +14,14 @@ import { HeroService } from './hero.service'
         <span class="badge">{{hero.id}}</span> {{hero.name}}
       </li>
     </ul>
-    <hero-detail [hero]="selectedHero"></hero-detail>
+    <div *ngIf="selectedHero">
+      <h2>
+        {{selectedHero.name | uppercase}} is my hero
+      </h2>
+      <button (click)="gotoDetail()">View Details</button>
+    </div>
   `,
-  styles: [`
+  styles: [ `
     .selected {
       background-color: #CFD8DC !important;
       color: white;
@@ -70,8 +75,8 @@ import { HeroService } from './hero.service'
       margin-right: .8em;
       border-radius: 4px 0 0 4px;
     }
-  `],
-  providers: [HeroService]
+  ` ],
+  providers: [ HeroService ]
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
